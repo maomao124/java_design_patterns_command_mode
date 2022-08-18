@@ -2,6 +2,8 @@ package mao.t1;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -57,17 +59,90 @@ public class SwingRemoteController
         //个性化
         setPersonalise();
 
+        //初始化遥控器对象
         initRemoteController();
 
         //设置布局
         setLayout(jFrame);
 
-
         //设置关闭的监听器
         setCloseListener(jFrame);
 
+        //给按钮添加监听器
+        setButtonListener();
+
+
         jFrame.setVisible(true);
 
+    }
+
+    /**
+     * 给按钮添加监听器
+     */
+    private void setButtonListener()
+    {
+        UndoButton.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                remoteController.undoButtonWasPushed();
+            }
+        });
+
+        LightOnButton.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                remoteController.onButtonWasPushed(0);
+            }
+        });
+
+        LightOffButton.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                remoteController.offButtonWasPushed(0);
+            }
+        });
+
+        TVOnButton.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                remoteController.onButtonWasPushed(1);
+            }
+        });
+
+        TVOffButton.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                remoteController.offButtonWasPushed(1);
+            }
+        });
+
+        AirConditionerOnButton.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                remoteController.onButtonWasPushed(2);
+            }
+        });
+
+        AirConditionerOffButton.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                remoteController.offButtonWasPushed(2);
+            }
+        });
     }
 
     /**
@@ -76,7 +151,6 @@ public class SwingRemoteController
     private void initRemoteController()
     {
         remoteController = new RemoteController(3);
-        System.out.println(remoteController.getCommandsTotal());
         remoteController.setCommand(0, new LightOnCommand(), new LightOffCommand());
         remoteController.setCommand(1, new TVOnCommand(), new TVOffCommand());
         remoteController.setCommand(2, new AirConditionerOnCommand(), new AirConditionerOffCommand());
