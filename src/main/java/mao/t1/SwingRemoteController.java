@@ -86,7 +86,16 @@ public class SwingRemoteController
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                remoteController.undoButtonWasPushed();
+                try
+                {
+                    remoteController.undoButtonWasPushed();
+                }
+                catch (NullPointerException ex)
+                {
+                    Toolkit.getDefaultToolkit().beep();
+                    System.err.println(ex.getMessage());
+                    JOptionPane.showMessageDialog(null, "还未进行如何操作，无法撤销", "提示", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
 
