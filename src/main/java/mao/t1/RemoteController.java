@@ -15,5 +15,90 @@ package mao.t1;
 
 public class RemoteController
 {
+    Command[] onCommands;
+    Command[] offCommands;
 
+    //撤销命令
+    Command undoCommand;
+
+    public RemoteController()
+    {
+        onCommands = new Command[5];
+        offCommands = new Command[5];
+
+        //初始化命令
+        for (int i = 0; i < 5; i++)
+        {
+            onCommands[i] = new NoCommand();
+            offCommands[i] = new NoCommand();
+        }
+    }
+
+    public RemoteController(int total)
+    {
+        onCommands = new Command[total];
+        offCommands = new Command[total];
+
+        //初始化命令
+        for (int i = 0; i < total; i++)
+        {
+            onCommands[i] = new NoCommand();
+            offCommands[i] = new NoCommand();
+        }
+    }
+
+    /**
+     * 获得命令的总数
+     *
+     * @return int型
+     */
+    public int getCommandsTotal()
+    {
+        return onCommands.length;
+    }
+
+    /**
+     * 设置命令
+     *
+     * @param no         命令号
+     * @param onCommand  打开的命令
+     * @param offCommand 关闭的命令
+     */
+    public void setCommand(int no, Command onCommand, Command offCommand)
+    {
+        onCommands[no] = onCommand;
+        offCommands[no] = offCommand;
+    }
+
+    /**
+     * 按下按钮，执行打开操作
+     *
+     * @param no 要执行打开操作的命令号
+     */
+    public void onButtonWasPushed(int no)
+    {
+        onCommands[no].execute();
+        //记录这次的操作，用于撤销
+        undoCommand = onCommands[no];
+    }
+
+    /**
+     * 按下按钮，执行关闭操作
+     *
+     * @param no 要执行打开操作的命令号
+     */
+    public void offButtonWasPushed(int no)
+    {
+        offCommands[no].execute();
+        //记录这次的操作，用于撤销
+        undoCommand = offCommands[no];
+    }
+
+    /**
+     * 按下撤销按钮
+     */
+    public void undoButtonWasPushed()
+    {
+        undoCommand.undo();
+    }
 }
