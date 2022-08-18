@@ -10,17 +10,20 @@ package mao.t1;
  * Date(创建日期)： 2022/8/18
  * Time(创建时间)： 21:37
  * Version(版本): 1.0
- * Description(描述)： 无
+ * Description(描述)： 遥控器
  */
 
 public class RemoteController
 {
-    Command[] onCommands;
-    Command[] offCommands;
+    private final Command[] onCommands;
+    private final Command[] offCommands;
 
     //撤销命令
-    Command undoCommand;
+    private Command undoCommand;
 
+    /**
+     * 构造方法，初始化操作，默认的命令总数为5
+     */
     public RemoteController()
     {
         onCommands = new Command[5];
@@ -34,6 +37,11 @@ public class RemoteController
         }
     }
 
+    /**
+     * 构造方法，初始化操作
+     *
+     * @param total 命令的总数
+     */
     public RemoteController(int total)
     {
         onCommands = new Command[total];
