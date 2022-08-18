@@ -15,7 +15,25 @@ package mao.t1;
 
 public class LightOffCommand implements Command
 {
-    private LightReceiver light;
+    private final LightReceiver light;
+
+    /**
+     * Instantiates a new Light off command.
+     */
+    public LightOffCommand()
+    {
+        light = new LightReceiver();
+    }
+
+    /**
+     * Instantiates a new Light off command.
+     *
+     * @param light the light
+     */
+    public LightOffCommand(LightReceiver light)
+    {
+        this.light = light;
+    }
 
     @Override
     public void execute()

@@ -3,47 +3,47 @@ package mao.t1;
 /**
  * Project name(项目名称)：java设计模式_命令模式
  * Package(包名): mao.t1
- * Class(类名): LightOnCommand
+ * Class(类名): TVOnCommand
  * Author(作者）: mao
  * Author QQ：1296193245
  * GitHub：https://github.com/maomao124/
  * Date(创建日期)： 2022/8/18
- * Time(创建时间)： 21:31
+ * Time(创建时间)： 21:52
  * Version(版本): 1.0
  * Description(描述)： 无
  */
 
-public class LightOnCommand implements Command
+public class TVOnCommand implements Command
 {
-    private final LightReceiver light;
+    private final TVReceiver tvReceiver;
 
     /**
-     * Instantiates a new Light on command.
+     * Instantiates a new Tv on command.
      */
-    public LightOnCommand()
+    public TVOnCommand()
     {
-        light = new LightReceiver();
+        tvReceiver = new TVReceiver();
     }
 
     /**
-     * Instantiates a new Light on command.
+     * Instantiates a new Tv on command.
      *
-     * @param light the light
+     * @param tvReceiver the tv receiver
      */
-    public LightOnCommand(LightReceiver light)
+    public TVOnCommand(TVReceiver tvReceiver)
     {
-        this.light = light;
+        this.tvReceiver = tvReceiver;
     }
 
     @Override
     public void execute()
     {
-        light.on();
+        tvReceiver.on();
     }
 
     @Override
     public void undo()
     {
-        light.off();
+        tvReceiver.off();
     }
 }
