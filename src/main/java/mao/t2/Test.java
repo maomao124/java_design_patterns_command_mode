@@ -15,5 +15,34 @@ package mao.t2;
 
 public class Test
 {
+    public static void main(String[] args)
+    {
+        Order order1 = new Order();
+        order1.setDiningTable(1);
+        order1.getFoodDic().put("西红柿鸡蛋面", 1);
+        order1.getFoodDic().put("小杯可乐", 2);
 
+        Order order2 = new Order();
+        order2.setDiningTable(3);
+        order2.getFoodDic().put("尖椒肉丝盖饭", 1);
+        order2.addFoodDic("小杯雪碧", 1);
+
+        OrderCommand orderCommand1 = new OrderCommand(order1);
+        OrderCommand orderCommand2 = new OrderCommand(order2);
+
+        Waitor waitor = new Waitor();
+        waitor.setCommand(orderCommand1);
+        waitor.setCommand(orderCommand2);
+        waitor.orderUp();
+        waitor.orderUp();
+
+        Order order3 = new Order();
+        order3.setDiningTable(4);
+        order3.addFoodDic("马铃薯炒土豆", 2);
+        OrderCommand orderCommand3 = new OrderCommand(order3);
+
+        waitor.setCommand(orderCommand3);
+
+        waitor.orderUp();
+    }
 }

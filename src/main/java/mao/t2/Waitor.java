@@ -47,8 +47,10 @@ public class Waitor
         {
             if (command != null)
             {
+                System.out.println();
                 command.execute();
             }
         }
+        commands.clear();
     }
 }
